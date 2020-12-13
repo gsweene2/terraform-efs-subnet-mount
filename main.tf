@@ -1,0 +1,20 @@
+terraform {
+  required_version = ">= 0.12"
+}
+
+provider "aws" {
+  region = var.aws_region
+}
+
+resource "aws_efs_file_system" "foo_with_lifecyle_policy" {
+  creation_token = "my-product"
+
+  lifecycle_policy {
+    transition_to_ia = "AFTER_30_DAYS"
+  }
+}
+
+resource "aws_efs_mount_target" "alpha" {
+  file_system_id = aws_efs_file_system.foo_with_lifecyle_policy.id
+  subnet_id      = "subnet-e8e25e8f"
+}
