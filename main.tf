@@ -7,7 +7,7 @@ provider "aws" {
 }
 
 resource "aws_efs_file_system" "foo_with_lifecyle_policy" {
-  creation_token = "my-product"
+  creation_token = var.creation_token
 
   lifecycle_policy {
     transition_to_ia = var.lifecycle_policy
