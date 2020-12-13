@@ -1,9 +1,13 @@
-variable "subnet_id" {
+variable "aws_region" {
   description = ""
-  default     = "subnet-e8e25e8f"
+  default = "us-east-1"
 }
 
-variable "transition_to_ia" {
-    description = ""
-    default = "AFTER_30_DAYS"
+variable "subnet_id" {
+description = ""
+}
+
+variable "lifecycle_policy" {
+  description = ""
+  default = "AFTER_30_DAYS"
 }
