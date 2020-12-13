@@ -7,8 +7,13 @@ provider "aws" {
 }
 
 resource "aws_efs_file_system" "foo_with_lifecyle_policy" {
-  creation_token = var.creation_token
-
+  creation_token                  = var.creation_token
+  encrypted                       = var.encrypted
+  kms_key_id                      = var.kms_key_id != null ? var.kms_key_id : null
+  performance_mode                = var.performance_mode
+  throughput_mode                 = var.throughput_mode
+  provisioned_throughput_in_mibps = var.throughput_mode == "provisioned" ? var.provisioned_throughput_in_mibps : null
+  tags                            = var.tags
   lifecycle_policy {
     transition_to_ia = var.lifecycle_policy
   }
